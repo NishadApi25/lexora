@@ -4,14 +4,14 @@ import { useState, useEffect } from "react";
 
 interface AffiliatePopupProps {
   productName: string;
-  productSlug: string;
+  refCode: string;  // Add this
   show: boolean;
   onClose: () => void;
 }
 
 export default function AffiliatePopup({
   productName,
-  productSlug,
+  refCode,
   show,
   onClose,
 }: AffiliatePopupProps) {
@@ -24,8 +24,8 @@ export default function AffiliatePopup({
   if (!visible) return null;
 
   const affiliateLink = `${
-    process.env.NEXT_PUBLIC_SITE_URL || "https://yourdomain.com"
-  }/product/${productSlug}?ref=affiliate`;
+    process.env.NEXT_PUBLIC_BASE_URL || "https://yourdomain.com"
+  }/api/affiliate/click?ref=${refCode}`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(affiliateLink);
@@ -37,7 +37,6 @@ export default function AffiliatePopup({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="bg-white rounded-2xl shadow-xl p-6 max-w-sm w-full text-center relative">
-        {/* Close Button */}
         <button
           onClick={() => {
             setVisible(false);

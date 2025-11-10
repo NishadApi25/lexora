@@ -4,12 +4,12 @@ import { useState } from "react";
 import AffiliatePopup from "@/components/AffiliatePopup";
 
 interface AffiliateButtonProps {
-  productSlug: string;
+  productSlug: string; // Or productId if you have ObjectId
 }
 
 export default function AffiliateButton({ productSlug }: AffiliateButtonProps) {
   const [showPopup, setShowPopup] = useState(false);
-  const [affiliateLink, setAffiliateLink] = useState<string | null>(null);
+  const [refCode, setRefCode] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleGenerateLink = async () => {
@@ -18,14 +18,13 @@ export default function AffiliateButton({ productSlug }: AffiliateButtonProps) {
       const res = await fetch("/api/affiliate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productId: productSlug }),
+        body: JSON.stringify({ productId: productSlug }), // ideally use _id
       });
       const data = await res.json();
-      if (res.ok) {
-        // Use click API link instead of direct product link
-        setAffiliateLink(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/affiliate/click?ref=${data.refCode}`
-        );
+      if (res.ok && data.link) {
+        const url = new URL(data.link);
+        const ref = url.searchParams.get("ref") || "";
+        setRefCode(ref);
         setShowPopup(true);
       } else {
         alert(data.message || "Error creating affiliate link");
@@ -48,10 +47,10 @@ export default function AffiliateButton({ productSlug }: AffiliateButtonProps) {
         {loading ? "Generating..." : "Generate Affiliate Link"}
       </button>
 
-      {showPopup && affiliateLink && (
+      {showPopup && refCode && (
         <AffiliatePopup
-          productName={productSlug}
-          productSlug={affiliateLink} // Pass full affiliate link
+          productName={productSlug} // optionally fetch name
+          refCode={refCode}
           show={showPopup}
           onClose={() => setShowPopup(false)}
         />
