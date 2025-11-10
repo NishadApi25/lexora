@@ -1,8 +1,8 @@
 // app/api/affiliate/route.ts
 import { auth } from "@/auth";
 import { NextResponse } from "next/server";
-import { connectToDB } from "@/lib/db"; // তোমার DB util
-import AffiliateLink from "@/lib/db/models/affiliate.model"; // নিচে দেব
+import { connectToDB } from "@/lib/db"; 
+import AffiliateLink from "@/lib/db/models/affiliate.model"; 
 
 export async function POST(req: Request) {
   try {
@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
     await connectToDB();
 
-    // আগের লিঙ্ক থাকলে সেটা ফেরত দেবে
+  
     let existing = await AffiliateLink.findOne({
       product: productId,
       user: session.user.id,
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ link: existing.link });
     }
 
-    // নতুন লিঙ্ক তৈরি
+   
     const refCode = Math.random().toString(36).substring(2, 10);
     const link = `${process.env.NEXT_PUBLIC_BASE_URL}/product/${productId}?ref=${refCode}`;
 

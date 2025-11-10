@@ -1,6 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-
+import { useState } from "react"; // added
 import {
   Card,
   CardContent,
@@ -8,12 +10,12 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { IProduct } from "@/lib/db/models/product.model";
-
 import { formatNumber, generateId, round2 } from "@/lib/utils";
 import AddToCart from "./add-to-cart";
 import ImageHover from "./image-hover";
 import ProductPrice from "./product-price";
 import Rating from "./rating";
+import AffiliatePopup from "./AffiliatePopup"; //  added
 
 const ProductCard = ({
   product,
@@ -26,6 +28,8 @@ const ProductCard = ({
   hideBorder?: boolean;
   hideAddToCart?: boolean;
 }) => {
+  const [showAffiliatePopup, setShowAffiliatePopup] = useState(false); //  added
+
   const ProductImage = () => (
     <Link href={`/product/${product.slug}`}>
       <div className="relative h-52">
@@ -49,6 +53,7 @@ const ProductCard = ({
       </div>
     </Link>
   );
+
   const ProductDetails = () => (
     <div className="flex-1 space-y-2">
       <p className="font-bold">{product.brand}</p>
@@ -76,6 +81,7 @@ const ProductCard = ({
       />
     </div>
   );
+
   const AddButton = () => (
     <div className="w-full text-center">
       <AddToCart
@@ -106,22 +112,56 @@ const ProductCard = ({
             <ProductDetails />
           </div>
           {!hideAddToCart && <AddButton />}
+
+          {/*  Affiliate Popup trigger (added) */}
+          <div className="px-3 pb-3 text-center">
+            <button
+              onClick={() => setShowAffiliatePopup(true)}
+              className="text-blue-600 hover:underline"
+            >
+              View Affiliate Offer
+            </button>
+
+            <AffiliatePopup
+              productName={product.name}
+              productSlug={product.slug}
+              show={showAffiliatePopup}
+              onClose={() => setShowAffiliatePopup(false)}
+            />
+          </div>
         </>
       )}
     </div>
   ) : (
-    <Card className="flex flex-col  ">
+    <Card className="flex flex-col">
       <CardHeader className="p-3">
         <ProductImage />
       </CardHeader>
       {!hideDetails && (
         <>
-          <CardContent className="p-3 flex-1  text-center">
+          <CardContent className="p-3 flex-1 text-center">
             <ProductDetails />
           </CardContent>
           <CardFooter className="p-3">
             {!hideAddToCart && <AddButton />}
           </CardFooter>
+
+          {/* Affiliate Popup trigger (added) */}
+          <div className="px-3 pb-3 text-center">
+            <button
+              onClick={() => setShowAffiliatePopup(true)}
+              className="text-blue-600 hover:underline"
+            >
+              View Affiliate Offer
+            </button>
+
+            <AffiliatePopup
+              productName={product.name}
+              productSlug={product.slug}
+              show={showAffiliatePopup}
+              onClose={() => setShowAffiliatePopup(false)}
+            />
+          </div>
         </>
       )}
     </Card>

@@ -3,11 +3,13 @@ import { connectToDB } from "@/lib/db";
 import AffiliateLink from "@/lib/db/models/affiliate.model";
 
 export async function POST(req: Request) {
-  const { ref } = await req.json();
-  if (!ref) return NextResponse.json({ message: "Missing ref" });
+  const { productId } = await req.json();
 
   await connectToDB();
-  await AffiliateLink.findOneAndUpdate({ refCode: ref }, { $inc: { clicks: 1 } });
 
-  return NextResponse.json({ message: "Tracked" });
+  let existing = await AffiliateLink.findOne({ productId });
+  if (existing) return NextResponse.json(existing);
+
+  const newLink = await AffiliateLink.create({ productId });
+  return NextResponse.json(newLink);
 }
