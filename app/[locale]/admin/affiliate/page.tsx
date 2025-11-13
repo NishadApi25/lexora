@@ -44,7 +44,6 @@ export default function AffiliateDashboard() {
           });
           setChartData(data.chart);
         } else {
-          //  fallback dummy chart data so the graph always shows
           setChartData([
             { date: "Nov 1", earnings: 40, clicks: 100 },
             { date: "Nov 5", earnings: 60, clicks: 140 },
@@ -112,13 +111,10 @@ export default function AffiliateDashboard() {
             </p>
 
             {/* View Reports Button */}
-            <button className="mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg">
+            <button className="mt-4 w-full border-2 border-yellow-400 text-black py-2 rounded-lg font-medium hover:bg-yellow-50 transition-all">
               View Full Reports
             </button>
           </div>
-
-          {/* Deals Box */}
-          
         </div>
 
         {/* ==== RIGHT: Earnings Overview ==== */}
@@ -135,10 +131,10 @@ export default function AffiliateDashboard() {
                 <button
                   key={d}
                   onClick={() => handleRangeChange(d)}
-                  className={`px-3 py-1 text-sm rounded-lg border ${
+                  className={`px-3 py-1 text-sm rounded-lg border font-medium transition-all ${
                     daysRange === d
-                      ? "bg-indigo-600 text-white border-indigo-600"
-                      : "text-gray-600 hover:bg-gray-100"
+                      ? "bg-yellow-400 text-black border-yellow-400"
+                      : "text-gray-600 border-gray-300 hover:bg-gray-100"
                   }`}
                 >
                   {d} Days

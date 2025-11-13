@@ -5,7 +5,7 @@ import {
   approvePayPalOrder,
   createPayPalOrder,
 } from "@/lib/actions/order.actions";
-import { IOrder } from "@/lib/db/models/order.model";
+import { IOrder } from "@/lib/db/models/Order.model";
 import { formatDateTime } from "@/lib/utils";
 import {
   PayPalButtons,

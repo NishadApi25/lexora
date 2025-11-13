@@ -15,7 +15,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { deliverOrder, updateOrderToPaid } from "@/lib/actions/order.actions";
-import { IOrder } from "@/lib/db/models/order.model";
+import { IOrder } from "@/lib/db/models/Order.model";
 import { cn, formatDateTime } from "@/lib/utils";
 import ActionButton from "../action-button";
 import ProductPrice from "../product/product-price";

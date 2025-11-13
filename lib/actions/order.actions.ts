@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache";
 import { DateRange } from "react-day-picker";
 import { PAGE_SIZE } from "../constants";
 import { connectToDatabase } from "../db";
-import Order, { IOrder } from "../db/models/order.model";
+import Order, { IOrder } from "../db/models/Order.model";
 import Product from "../db/models/product.model";
 import User from "../db/models/user.model";
 import { paypal } from "../paypal";

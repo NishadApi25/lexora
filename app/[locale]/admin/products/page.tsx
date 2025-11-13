@@ -34,20 +34,20 @@ export default function UpdateProductPage({ params }: { params: { id: string } }
         <ProductForm type="Update" product={product} productId={product._id} />
       </div>
 
-      {/* Generate Affiliate Link Button */}
+      {/* Affiliate Link Button */}
       <div className="mt-6">
         <button
           onClick={() => setShowPopup(true)}
-          className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
+          className="border-2 border-yellow-400 text-black px-4 py-2 rounded-md font-medium hover:bg-yellow-50 transition-all"
         >
-          Generate Affiliate Link
+          Affiliate Link
         </button>
       </div>
 
       {/* Popup Component */}
       <AffiliatePopup
         productName={product.name}
-        productSlug={product.slug}
+        refCode={product.slug} // or actual affiliate ref code
         show={showPopup}
         onClose={() => setShowPopup(false)}
       />

@@ -29,7 +29,7 @@ export default async function AffiliateDashboard() {
                 <a
                   href={`${process.env.NEXT_PUBLIC_BASE_URL}/api/affiliate/click?ref=${link.refCode}`}
                   target="_blank"
-                  className="text-blue-600"
+                  className="text-yellow-600"
                 >
                   Visit
                 </a>

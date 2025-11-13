@@ -11,7 +11,7 @@ import {
   generateId,
   round2,
 } from "../utils";
-import Order from "./models/order.model";
+import Order from "./models/Order.model";
 import Product from "./models/product.model";
 import Review from "./models/review.model";
 import Setting from "./models/setting.model";

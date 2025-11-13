@@ -1,3 +1,4 @@
+// lib/db/models/Order.model.ts
 import { IOrderInput } from "@/types";
 import { Document, Model, model, models, Schema } from "mongoose";
 
@@ -5,6 +6,7 @@ export interface IOrder extends Document, IOrderInput {
   _id: string;
   createdAt: Date;
   updatedAt: Date;
+  affiliateId?: string; // ✅ added for affiliate tracking
 }
 
 const orderSchema = new Schema<IOrder>(
@@ -13,6 +15,11 @@ const orderSchema = new Schema<IOrder>(
       type: Schema.Types.ObjectId as unknown as typeof String,
       ref: "User",
       required: true,
+    },
+    affiliateId: {
+      type: Schema.Types.ObjectId,
+      ref: "Affiliate",
+      required: false, // ✅ so affiliate commissions can be tracked
     },
     items: [
       {

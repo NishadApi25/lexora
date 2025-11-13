@@ -20,7 +20,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
       <button
         onClick={() => setShowPopup(true)}
-        className="mt-3 text-blue-600 hover:underline"
+        className="mt-3 text-yellow-600 hover:underline"
       >
         View Affiliate Offer
       </button>

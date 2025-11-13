@@ -1,5 +1,5 @@
 import { SENDER_EMAIL, SENDER_NAME } from "@/lib/constants";
-import { IOrder } from "@/lib/db/models/order.model";
+import { IOrder } from "@/lib/db/models/Order.model";
 import { Resend } from "resend";
 import AskReviewOrderItemsEmail from "./ask-review-order-items";
 import PurchaseReceiptEmail from "./purchase-receipt";

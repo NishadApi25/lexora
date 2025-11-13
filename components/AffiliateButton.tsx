@@ -42,9 +42,9 @@ export default function AffiliateButton({ productSlug }: AffiliateButtonProps) {
       <button
         onClick={handleGenerateLink}
         disabled={loading}
-        className="bg-blue-600 w-full text-white px-4 py-2 rounded-md hover:bg-blue-700 disabled:opacity-60"
+        className="bg-yellow-600 w-full text-white px-4 py-2 rounded-md hover:bg-blue-700 disabled:opacity-60"
       >
-        {loading ? "Generating..." : "Generate Affiliate Link"}
+        {loading ? "Generating..." : " Affiliate "}
       </button>
 
       {showPopup && refCode && (

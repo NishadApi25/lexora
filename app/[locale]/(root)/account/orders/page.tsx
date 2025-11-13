@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getMyOrders } from "@/lib/actions/order.actions";
-import { IOrder } from "@/lib/db/models/order.model";
+import { IOrder } from "@/lib/db/models/Order.model";
 import { formatDateTime, formatId } from "@/lib/utils";
 
 const PAGE_TITLE = "Your Orders";
